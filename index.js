@@ -37,6 +37,12 @@ app.put("/user/update/", async (req, res) => {
   res.json({ success: true });
 });
 
+app.get("/products", async (req, res) => {
+  const data = await Product.find({});
+
+  res.json(data);
+});
+
 app.post("/products/add", async (req, res) => {
   const productData = req.body;
   await Product.create(productData);
