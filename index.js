@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 
 // Models
 const User = require("./database/schema/User");
+const Product = require("./database/schema/Product");
 
 const app = express();
 
@@ -20,6 +21,27 @@ if (process.env.NODE_ENV !== "production") {
 
 app.get("/", (req, res) => {
   res.send("Hello World");
+});
+
+app.get("/user/:email", async (req, res) => {
+  const { email } = req.params;
+  const user = await User.findOne({ email });
+
+  res.json(user);
+});
+
+app.put("/user/update/", async (req, res) => {
+  const { email, ...newData } = req.body;
+  await User.updateOne({ email }, newData);
+
+  res.json({ success: true });
+});
+
+app.post("/products/add", async (req, res) => {
+  const productData = req.body;
+  await Product.create(productData);
+
+  res.json({ success: true });
 });
 
 app.post("/login", async (req, res) => {
