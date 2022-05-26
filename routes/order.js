@@ -14,6 +14,13 @@ router.get("/my", async (req, res) => {
   res.json(data);
 });
 
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  const data = await Order.findOne({ _id: id });
+
+  res.json(data);
+});
+
 router.post("/create", async (req, res) => {
   const orderData = req.body;
   const product = await Product.findOne({ _id: orderData.product_id });
@@ -31,7 +38,7 @@ router.post("/create", async (req, res) => {
 
 router.put("/update", async (req, res) => {
   const { order_id, ...newData } = req.body;
-  const data = await Order.updateOne(
+  await Order.updateOne(
     { _id: order_id },
     {
       $set: newData,

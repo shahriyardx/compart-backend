@@ -8,6 +8,7 @@ const userRouter = require("./routes/user");
 const productRouter = require("./routes/product");
 const authRouter = require("./routes/auth");
 const orderRouter = require("./routes/order");
+const paymentRouter = require("./routes/payment");
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/user", userRouter);
 app.use("/products", productRouter);
 app.use("/auth", authRouter);
 app.use("/order", orderRouter);
+app.use("/payment", paymentRouter);
 
 const PORT = process.env.PORT | 5000;
 
