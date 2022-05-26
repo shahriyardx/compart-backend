@@ -8,6 +8,12 @@ router.get("/", async (req, res) => {
   res.json(data);
 });
 
+router.get("/my", async (req, res) => {
+  const data = await Order.find({}).sort({ createdAt: -1 });
+
+  res.json(data);
+});
+
 router.post("/create", async (req, res) => {
   const orderData = req.body;
   const product = await Product.findOne({ _id: orderData.product_id });
@@ -31,6 +37,12 @@ router.put("/update", async (req, res) => {
       $set: newData,
     }
   );
+  res.json({ success: true });
+});
+
+router.delete("/delete/:orderId", async (req, res) => {
+  const { orderId } = req.params;
+  await Order.deleteOne({ _id: orderId });
   res.json({ success: true });
 });
 
