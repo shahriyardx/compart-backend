@@ -1,6 +1,11 @@
 const router = require("express").Router();
 const User = require("../database/schema/User");
 
+router.get("/", async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+});
+
 router.get("/:email", async (req, res) => {
   const { email } = req.params;
   const user = await User.findOne({ email });
