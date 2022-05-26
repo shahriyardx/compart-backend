@@ -7,6 +7,7 @@ const cors = require("cors");
 const userRouter = require("./routes/user");
 const productRouter = require("./routes/product");
 const authRouter = require("./routes/auth");
+const orderRouter = require("./routes/order");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 app.use("/user", userRouter);
 app.use("/products", productRouter);
 app.use("/auth", authRouter);
+app.use("/order", orderRouter);
 
 const PORT = process.env.PORT | 5000;
 
