@@ -15,8 +15,19 @@ router.get("/:email", async (req, res) => {
 
 router.put("/update", async (req, res) => {
   const { email, ...newData } = req.body;
-  await User.updateOne({ email }, newData);
+  await User.updateOne(
+    { email },
+    {
+      $set: newData,
+    }
+  );
 
+  res.json({ success: true });
+});
+
+router.delete("/delete/:userId", async (req, res) => {
+  const { userId } = req.params;
+  await User.deleteOne({ _id: userId });
   res.json({ success: true });
 });
 
