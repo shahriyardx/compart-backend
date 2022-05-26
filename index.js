@@ -35,7 +35,7 @@ app.use("/order", verifyJwt, orderRouter);
 app.use("/payment", verifyJwt, paymentRouter);
 app.use("/review", reviewRouter);
 
-const PORT = process.env.PORT | 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`App running on port http://localhost:${PORT}`);
