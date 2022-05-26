@@ -14,6 +14,12 @@ router.post("/add", async (req, res) => {
   res.json({ success: true });
 });
 
+router.get("/:productId", async (req, res) => {
+  const { productId } = req.params;
+  const product = await Product.findOne({ _id: productId });
+  res.json(product);
+});
+
 router.delete("/delete/:productId", async (req, res) => {
   const { productId } = req.params;
   await Product.deleteOne({ _id: productId });
