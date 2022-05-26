@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Order = require("../database/schema/Order");
 const Product = require("../database/schema/Product");
+const verifyAdmin = require("../utils/verifyAdmin");
 
 router.get("/", async (req, res) => {
   const data = await Order.find({}).sort({ createdAt: -1 });
@@ -9,7 +10,8 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/my", async (req, res) => {
-  const data = await Order.find({}).sort({ createdAt: -1 });
+  const email = req.user.email;
+  const data = await Order.find({ email }).sort({ createdAt: -1 });
 
   res.json(data);
 });

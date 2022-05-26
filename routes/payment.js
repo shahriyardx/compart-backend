@@ -1,6 +1,5 @@
 const stripe = require("stripe")(process.env.STRIPE_SK);
 const router = require("express").Router();
-const Order = require("../database/schema/Order");
 
 router.post("/", async (req, res) => {
   const orderInfo = req.body;

@@ -9,6 +9,7 @@ const productRouter = require("./routes/product");
 const authRouter = require("./routes/auth");
 const orderRouter = require("./routes/order");
 const paymentRouter = require("./routes/payment");
+const verifyJwt = require("./utils/verifyJwt");
 
 const app = express();
 
@@ -26,11 +27,11 @@ app.get("/", (req, res) => {
 });
 
 // Use Routers
-app.use("/user", userRouter);
+app.use("/user", verifyJwt, userRouter);
 app.use("/products", productRouter);
 app.use("/auth", authRouter);
-app.use("/order", orderRouter);
-app.use("/payment", paymentRouter);
+app.use("/order", verifyJwt, orderRouter);
+app.use("/payment", verifyJwt, paymentRouter);
 
 const PORT = process.env.PORT | 5000;
 

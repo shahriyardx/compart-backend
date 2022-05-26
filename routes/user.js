@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const User = require("../database/schema/User");
+const verifyAdmin = require("../utils/verifyAdmin");
 
-router.get("/", async (req, res) => {
+router.get("/", verifyAdmin, async (req, res) => {
   const users = await User.find({});
   res.json(users);
 });
