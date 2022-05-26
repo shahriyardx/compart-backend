@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+// Use Routers
 app.use("/user", userRouter);
 app.use("/products", productRouter);
 app.use("/auth", authRouter);
