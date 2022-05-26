@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
 
-const OrderSchema = new mongoose.Schema({
-  product_name: String,
-  product_id: String,
-  email: String,
-  phone: String,
-  shipping_address: String,
-  due: Number,
-  quantity: Number,
-  status: String,
-  paid: Boolean,
-});
+const OrderSchema = new mongoose.Schema(
+  {
+    product_name: String,
+    product_id: String,
+    email: String,
+    phone: String,
+    shipping_address: String,
+    due: Number,
+    quantity: Number,
+    status: String,
+    paid: Boolean,
+  },
+  { timestamps: true }
+);
 
 OrderSchema.pre("save", function (next) {
   var order = this;

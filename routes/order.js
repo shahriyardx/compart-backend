@@ -3,7 +3,7 @@ const Order = require("../database/schema/Order");
 const Product = require("../database/schema/Product");
 
 router.get("/", async (req, res) => {
-  const data = await Order.find({});
+  const data = await Order.find({}).sort({ createdAt: -1 });
 
   res.json(data);
 });
@@ -20,6 +20,17 @@ router.post("/create", async (req, res) => {
     }
   );
   await Order.create(orderData);
+  res.json({ success: true });
+});
+
+router.put("/update", async (req, res) => {
+  const { order_id, ...newData } = req.body;
+  const data = await Order.updateOne(
+    { _id: order_id },
+    {
+      $set: newData,
+    }
+  );
   res.json({ success: true });
 });
 
