@@ -2,6 +2,7 @@ require("dotenv").config();
 require("./database/mongodb.init");
 const express = require("express");
 const cors = require("cors");
+const verifyJwt = require("./utils/verifyJwt");
 
 // Routers
 const userRouter = require("./routes/user");
@@ -9,7 +10,7 @@ const productRouter = require("./routes/product");
 const authRouter = require("./routes/auth");
 const orderRouter = require("./routes/order");
 const paymentRouter = require("./routes/payment");
-const verifyJwt = require("./utils/verifyJwt");
+const reviewRouter = require("./routes/review");
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use("/products", productRouter);
 app.use("/auth", authRouter);
 app.use("/order", verifyJwt, orderRouter);
 app.use("/payment", verifyJwt, paymentRouter);
+app.use("/review", reviewRouter);
 
 const PORT = process.env.PORT | 5000;
 
