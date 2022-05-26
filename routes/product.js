@@ -14,4 +14,10 @@ router.post("/add", async (req, res) => {
   res.json({ success: true });
 });
 
+router.delete("/delete/:productId", async (req, res) => {
+  const { productId } = req.params;
+  await Product.deleteOne({ _id: productId });
+  res.json({ success: true });
+});
+
 module.exports = router;
